@@ -6,9 +6,8 @@ function Cart() {
   return (
     <div>
         
-        <Button variant="primary">
-      Cart <Badge bg="secondary">9</Badge>
-    </Button>
+       
+      Cart page
     </div>
   )
 }
