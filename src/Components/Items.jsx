@@ -7,7 +7,8 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button } from 'react-bootstrap';
-
+import { addWishList } from "../redux/slice/wishListSlice";
+import { useDispatch } from "react-redux";
 function Items() {
   const [items, setItems] = useState([]);
   useEffect(() => {
@@ -17,6 +18,7 @@ function Items() {
       });
     });
   });
+  const dispatch = useDispatch()
   return (
     <div className="container mt-5">
       <Grid
@@ -43,7 +45,6 @@ function Items() {
                     height="200"
                     image={list.image}
                     alt="Paella dish"
-                    // className="p-4"
                     sx={{
                       objectFit: "contain", // Ensures the entire image fits within the container
                       width: "100%",
@@ -59,26 +60,21 @@ function Items() {
                     >
                       {list.title}
                     </Typography>
-                    {/* <Typography
-                      variant="body2"
-                      sx={{ color: "text.secondary" }}
-                    >
-                      {list.description.slice(1, 50)}...
-                    </Typography> */}
+                   
                     <Typography
                       variant="body2"
                       sx={{ color: "text.secondary", textAlign: "center" }}
                     >
                       Price : ${list.price}
                     </Typography>
-                    <Button variant="success" className="me-3">WishList</Button>
-                    <Button variant="danger">Add To cart</Button>{" "}
+                    <Button variant="success" onClick={()=>dispatch(addWishList(list))} className="me-3">WishList</Button>
+                    <Button variant="danger" >Add To cart</Button>
                   </CardContent>
                 </Card>
               </Grid>
             ))
           : " Nothing to show"}
-      </Grid>{" "}
+      </Grid>
     </div>
   );
 }
