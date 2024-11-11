@@ -8,7 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button } from 'react-bootstrap';
 import { addWishList } from "../redux/slice/wishListSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 function Items() {
   const [items, setItems] = useState([]);
   useEffect(() => {
@@ -19,6 +19,10 @@ function Items() {
     });
   });
   const dispatch = useDispatch()
+  // const WishListItems = useSelector((state)=>state.wishlistReducer);
+  
+  
+
   return (
     <div className="container mt-5">
       <Grid

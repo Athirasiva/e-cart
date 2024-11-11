@@ -5,7 +5,11 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { useSelector } from "react-redux";
+
 function WishList() {
+  const WishListItems = useSelector((state)=>state.wishlistReducer);
+  console.log(WishListItems);
   return (
     <div className="container mt-5">
        <Grid
@@ -13,12 +17,15 @@ function WishList() {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
-         <Grid item xs={2} sm={4} md={4}>
+        {
+          WishListItems.length > 0?
+          WishListItems.map((list,index)=>(
+<Grid item xs={2} sm={4} md={4}>
                 <Card sx={{ width: 300, height: 350, boxSizing: 'border-box' }}>
                   <CardMedia
                     component="img"
                     height="200"
-                    image="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+                    image={list.image}
                     alt="Paella dish"
                     // className="p-4"
                     sx={{
@@ -34,14 +41,14 @@ function WishList() {
                       variant="body2"
                       sx={{ color: "text.primary", textAlign:"center"}}
                     >
-                     Fjallraven - Foldsack No…ckpack, Fits 15 Laptops
+                     {list.title}
                     </Typography>
                    
                     <Typography
                       variant="body2"
                       sx={{ color: "text.secondary", textAlign:"center" }}
                     >
-                      
+                      Price : {list.price}
                     </Typography>
                     <Button
                      variant="danger"
@@ -49,6 +56,10 @@ function WishList() {
                   </CardContent>
                 </Card>
               </Grid>
+          ))
+          :"nothing in cart"
+        }
+         
       </Grid>
         
   </div>
