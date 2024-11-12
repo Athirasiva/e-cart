@@ -8,7 +8,8 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button } from 'react-bootstrap';
 import { addWishList } from "../redux/slice/wishListSlice";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addToCart} from "../redux/slice/cartSlice"
 function Items() {
   const [items, setItems] = useState([]);
   useEffect(() => {
@@ -19,7 +20,6 @@ function Items() {
     });
   });
   const dispatch = useDispatch()
-  // const WishListItems = useSelector((state)=>state.wishlistReducer);
   
   
 
@@ -48,7 +48,7 @@ function Items() {
                     component="img"
                     height="200"
                     image={list.image}
-                    alt="Paella dish"
+                    alt=" "
                     sx={{
                       objectFit: "contain", // Ensures the entire image fits within the container
                       width: "100%",
@@ -72,7 +72,7 @@ function Items() {
                       Price : ${list.price}
                     </Typography>
                     <Button variant="success" onClick={()=>dispatch(addWishList(list))} className="me-3">WishList</Button>
-                    <Button variant="danger" >Add To cart</Button>
+                    <Button variant="danger" onClick={()=>dispatch(addToCart(list))}>Add To cart</Button>
                   </CardContent>
                 </Card>
               </Grid>

@@ -5,8 +5,11 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Badge from "react-bootstrap/Badge";
+import { useSelector } from "react-redux";
 
 function Header() {
+  const wishlist = useSelector((state)=>state.wishlistReducer)
+  const cart = useSelector((state)=>state.cartReducer)
   return (
     <div>
       <Navbar style={{backgroundColor:"#870a30", height:"80px"}}>
@@ -25,7 +28,7 @@ function Header() {
               >
                 WishList
               </Link>
-              <Badge bg="light" text="dark">9</Badge>
+              <Badge bg="light" text="dark">{wishlist.length}</Badge>
             </Button>
             <Button variant="warning">
               <Link
@@ -35,7 +38,7 @@ function Header() {
               >
                 Cart
               </Link>
-              <Badge bg="light" text="dark">9</Badge>
+              <Badge bg="light" text="dark">{cart.length}</Badge>
             </Button>
           </Nav>
         </Container>

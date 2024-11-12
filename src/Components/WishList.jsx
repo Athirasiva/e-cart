@@ -5,11 +5,17 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from '../redux/slice/cartSlice';
+import { removeFromWishList } from '../redux/slice/wishListSlice';
 
 function WishList() {
   const WishListItems = useSelector((state)=>state.wishlistReducer);
-  console.log(WishListItems);
+  const dispatch = useDispatch()
+  const handleCart  =(product)=>{
+    dispatch(addToCart(product))
+    dispatch(removeFromWishList(product.id))
+  }
   return (
     <div className="container mt-5">
        <Grid
@@ -26,7 +32,7 @@ function WishList() {
                     component="img"
                     height="200"
                     image={list.image}
-                    alt="Paella dish"
+                    alt=" "
                     // className="p-4"
                     sx={{
                       objectFit: "contain", // Ensures the entire image fits within the container
@@ -52,12 +58,13 @@ function WishList() {
                     </Typography>
                     <Button
                      variant="danger"
+                     onClick={()=>handleCart(list)}
                     >Add To cart</Button>
                   </CardContent>
                 </Card>
               </Grid>
           ))
-          :"nothing in cart"
+          :"nothing in Wishlist"
         }
          
       </Grid>
